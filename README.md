@@ -37,7 +37,7 @@ mm-plugin-apps: `apps-modals`
 
 ## Create a ticket
 
-EndPoint: `http://localhost:4000/createform`
+EndPoint: `http://localhost:4000/createticket`
 Method: `post`
 Body (example):
 
@@ -76,9 +76,13 @@ we will need to add an HTTP target which will accept the webhook notifications.
     1. **Url:** `<your_url/zendesk/webhook>`
     1. **Method:** POST
     1. **Content Type:** JSON
-
-**Developer Notes:** When testing webhooks locally, you will need to expose your
-localhost:4040 with ngrok
+1. Test your target endpoint
+    1. In the select dropdown: `Test Target`
+    1. `Submit`
+    1. When testing webhooks locally, you will need to expose localhost:4040 with ngrok
+1. Save your target endpoint
+    1. In the select dropdown: `Create Target`
+    1. `Submit`
 
 ### Add a trigger when new ticket is created
 
@@ -96,6 +100,8 @@ From [Zendesk Documentation:](https://developer.zendesk.com/rest_api/docs/suppor
         1. `Ticket` `Is` `Created`
     1. **Actions:**
         1. In the first select box choose `Notify target`
+            1. Note: this option will not show up until after a notification target has been
+               created
         1. In the second select box choose `Send notification when ticket
            created`
         1. Past the following in the JSON Body textarea.

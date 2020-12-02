@@ -1,8 +1,8 @@
 import {AppCallResponse, AppSelectOption} from 'mattermost-redux/types/apps';
 
 class Calls {
-    // createForm returns a form response to create a ticket from a post
-    createForm(message: string): AppCallResponse {
+    // createTicket returns a form response to create a ticket from a post
+    createTicket(message: string): AppCallResponse {
         const call: AppCallResponse = {
             type: 'form',
             form: {
@@ -58,7 +58,41 @@ class Calls {
         };
         return call;
     }
+
+    // subscribeForm returns a form response to create a ticket from a post
+    subscribeForm(message: string): AppCallResponse {
+        const call: AppCallResponse = {
+            type: 'form',
+            form: {
+                title: 'Create Zendesk Ticket',
+                header: 'Create a Zendesk from Mattermost by filling in the required fields and clicking the submit button. Addition text can be added in the `Optional message` form.',
+                footer: 'Message modal form footer',
+                fields: [
+                    {
+                        name: 'subject',
+                        type: 'text',
+                        is_required: true,
+                        hint: 'subject',
+                        modal_label: 'Subject',
+                    },
+                    {
+                        name: 'additional_message',
+                        type: 'text',
+                        hint: 'Add additional message to the Zendesk ticket',
+                        modal_label: 'Optional message',
+                        subtype: 'textarea',
+                        min_length: 2,
+                        max_length: 1024,
+                    },
+                ],
+
+            },
+        };
+        return call;
+    }
 }
+}
+
 
 function getStaticSelectOptions(values: string[]): AppSelectOption[] {
     const options: Array<AppSelectOption> = [];

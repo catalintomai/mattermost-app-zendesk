@@ -5,6 +5,7 @@ class Bindings {
     getBindings(): AppState {
         const state: AppsState = [
             this.postMenuBindings(),
+            this.channelHeaderBindings(),
         ];
         return state;
     }
@@ -19,7 +20,30 @@ class Bindings {
                     description: 'Create ticket in zendesk',
                     icon: 'https://raw.githubusercontent.com/jfrerich/mattermost-applet-zendesk/initial-PR/assets/zendesk.svg',
                     call: {
-                        url: 'https://jasonf.ngrok.io/createform',
+                        url: 'https://jasonf.ngrok.io/createticket',
+                        type: 'form',
+                        expand: {
+                            app: '',
+                            post: 'All',
+                        },
+                    },
+                },
+            ],
+        };
+        return binding;
+    }
+
+    // channelHeaderBindings returns bindings for the channel_header location
+    channelHeaderBindings(): AppBinding {
+        const binding: AppBinding = {
+            location_id: '/channel_header',
+            bindings: [
+                {
+                    label: 'Manage Zendesk Subscriptions',
+                    description: 'Create ticket in zendesk',
+                    icon: 'https://raw.githubusercontent.com/jfrerich/mattermost-applet-zendesk/initial-PR/assets/zendesk.svg',
+                    call: {
+                        url: 'https://jasonf.ngrok.io/subscribe',
                         type: 'form',
                         expand: {
                             app: '',

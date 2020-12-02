@@ -9,13 +9,24 @@ import {jsonStoreFileName} from '../app/constants';
 
 const router = express.Router();
 
-router.post('/createform', async (req: Request, res: Response) => {
+router.post('/createticket', async (req: Request, res: Response) => {
     const appCall: AppCall = req.body;
     if (appCall.type === 'form') {
-        const createForm = app.calls.createForm(appCall.context.post.message);
-        res.json(createForm);
+        const form = app.calls.createTicket(appCall.context.post.message);
+        res.json(form);
     } else {
         const message = app.createTicketFromPost(appCall);
+        res.json({});
+    }
+});
+
+router.post('/subscribe', async (req: Request, res: Response) => {
+    const appCall: AppCall = req.body;
+    if (appCall.type === 'form') {
+        const form = app.calls.subscribeForm();
+        res.json(form);
+    } else {
+        const message = app.createSubscription(appCall);
         res.json({});
     }
 });
